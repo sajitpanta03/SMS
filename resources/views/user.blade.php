@@ -1,15 +1,9 @@
-<?php
-require_once '../Models/user.php';
-require_once '../Layouts/header.php';
-$_SESSION['active'] = 'user';
-require_once '../Layouts/side_navigation.php';
+@extends('Layouts.main')
 
-$users = User::withCreator();
-?>
+@section('content')
+    
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-
-  <?php require_once '../Layouts/navigation.php'; ?>
 
   <div class="container-fluid py-4">
     <div class="row">
@@ -40,55 +34,59 @@ $users = User::withCreator();
                 </thead>
                 <tbody>
 
-                  <?php
-                  foreach ($users as $user) {
-                  ?>
+                  @foreach ($users as $user)
+                      
 
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?php echo $user['name']; ?></h6>
-                            <p class="text-xs text-secondary mb-0"><?php echo $user['email']; ?></p>
+                            <h6 class="mb-0 text-sm">{{$user->name}}</h6>
+                            <p class="text-xs text-secondary mb-0">{{$user->email}}</p>
                           </div>
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs text-secondary mb-0"><?php echo $user['address']; ?></p>
+                        <p class="text-xs text-secondary mb-0">{{$user->address}}</p>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold"><?php echo $user['phone_number']; ?></span>
+                        <span class="text-secondary text-xs font-weight-bold">{{$user->phone_number}}</span>
                       </td>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><?php echo $user['creator_name']; ?></h6>
-                            <p class="text-xs text-secondary mb-0"><?php echo $user['creator_email']; ?></p>
+                            <h6 class="mb-0 text-sm">
+                              @if ($user->creator != null)
+                                  {{$user->creator->name}}
+                              @else
+                                null
+                              @endif
+                            </h6>
+                            <p class="text-xs text-secondary mb-0"></p>
                           </div>
                         </div>
                       </td>
 
                       <td class="align-middle text-center">
                         <div class="d-flex flex-column justify-content-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $user['created_at']; ?> Created</span>
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $user['updated_at']; ?> Updated</span>
+                          <span class="text-secondary text-xs font-weight-bold">{{$user->created_at}} Created</span>
+                          <span class="text-secondary text-xs font-weight-bold">{{$user->updated_at}} Updated</span>
                         </div>
 
                       </td>
                       <td class="align-middle">
-                        <a href="../forms/useredit.php?id=<?php echo $user['id']; ?>" style="color: #000000;">
+                        <a href="../forms/useredit.php?id=" style="color: #000000;">
                           <i class="material-icons opacity-10">edit</i>
                         </a>
-                        <a href="../userController/softDeleteUser.php?id=<?php echo $user['id']; ?>" style="color: #000000;">
+                        <a href="../userController/softDeleteUser.php?id=" style="color: #000000;">
                           <i class="material-icons opacity-10">delete</i>
                         </a>
 
                       </td>
                     </tr>
 
-                  <?php
-                  }
-                  ?>
+                    
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -96,7 +94,6 @@ $users = User::withCreator();
         </div>
       </div>
     </div>
-    <?php require_once '../Layouts/footer.php'; ?>
   </div>
 </main>
 
@@ -169,6 +166,5 @@ $users = User::withCreator();
   }
 </script>
 
-</body>
 
-</html>
+@endsection

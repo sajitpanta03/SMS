@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+    function creator(){
+        return $this->hasOne($this::class, 'created_by');
+    }
 }
