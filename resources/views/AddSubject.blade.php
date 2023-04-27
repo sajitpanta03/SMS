@@ -1,7 +1,7 @@
 @extends('Layouts.main')
 
 <div class="container d-flex justify-content-center">
-    <form class="mt-4 col-6 shadow pt-4" action="add/" method="post" >
+    <form class="mt-4 col-6 shadow pt-4" action="/add" method="post" >
         @csrf
         <input type="hidden" name="id" value="">
         <div class="form-group">

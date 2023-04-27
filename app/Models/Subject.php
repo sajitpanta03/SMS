@@ -12,6 +12,5 @@ class Subject extends Model
 
     public function student(){
 
-        return $this->belongsTo(Student::class, 'student_ko_id');
     }
 }
