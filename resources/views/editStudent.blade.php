@@ -42,10 +42,24 @@
             @foreach ($subjects as $subject)
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="subjects_id[]" value="{{$subject->name}}"
-                        
-                        >
-                        {{$subject->name}}
+                        @php
+                            $checked = false;
+                        @endphp
+                        @foreach ($student->subjects as $sub)
+                            @if ($sub->name == $subject->name)
+                                <input type="checkbox" class="form-check-input" name="subjects_id[]"
+                                    value="{{ $subject->id }}" checked>
+                                @php
+                                    $checked = true;
+                                @endphp
+                            @endif
+                        @endforeach
+
+                        @if (!$checked)
+                            <input type="checkbox" class="form-check-input" name="subjects_id[]"
+                                value="{{ $subject->id }}">
+                        @endif
+                        {{ $subject->name }}
                     </label>
                 </div>
             @endforeach

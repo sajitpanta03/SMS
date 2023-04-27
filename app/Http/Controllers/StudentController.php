@@ -55,19 +55,18 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        // $student_subjects = [];
-        // foreach($student->subjects() as $subject){
-        //     $student_subjects.add($subject['id']);
-        // }
         return view('editStudent', ['student' => $student, 'subjects' => Subject::all()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(StoreStudentRequest $request, Student $student)
     {  
-        $student->update($request->validated());
+        DB::transaction(function() use ($request, $student){
+            $student->update($request->validated());
+            $student->subjects()->attach($request->subjects_id);
+        });
         return redirect()->route('students.index');
     }
 
