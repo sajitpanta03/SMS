@@ -16,7 +16,7 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="css/material-dashboard.css" rel="stylesheet" />
+    <link id="pagestyle" href="{{url('/')}}/css/material-dashboard.css" rel="stylesheet" />
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

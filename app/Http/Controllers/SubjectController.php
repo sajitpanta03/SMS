@@ -16,7 +16,6 @@ class SubjectController extends Controller
     function delete($id)
     {
         $data = Subject::with('student')->find($id);
-        dd($data->student);
         $data->delete();
         return redirect('subjects');
     }
