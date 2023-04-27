@@ -65,7 +65,7 @@ class StudentController extends Controller
     {  
         DB::transaction(function() use ($request, $student){
             $student->update($request->validated());
-            $student->subjects()->attach($request->subjects_id);
+            $student->subjects()->sync($request->subjects_id);
         });
         return redirect()->route('students.index');
     }
