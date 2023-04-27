@@ -39,9 +39,6 @@
 
             <h5>Subjects</h5>
 
-        
-            {{dd($student->subjects)}}
-
             @foreach ($subjects as $subject)
                 <div class="form-check">
                     <label class="form-check-label">
