@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('dashboard');
 });
@@ -20,3 +23,13 @@ Route::get('/', function () {
 Route::get('/students', function(){
     return view('student');
 });
+
+// Subject Route
+Route::get('subjects', [SubjectController::class, 'show']);
+Route::get('DeleteSubject/{id}', [SubjectController::class, 'delete']);
+Route::get('EditSubject/{id}', [SubjectController::class, 'ShowData']);
+Route::post('EditSubject/{id}', [SubjectController::class, 'edit']);
+Route::get('/AddSubject', function(){
+    return view('AddSubject');
+});
+Route::post('add', [SubjectController::class, 'add']);
