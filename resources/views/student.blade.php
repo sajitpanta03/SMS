@@ -110,7 +110,7 @@
 
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a href="" style="color: #000000;">
+                                                    <a href="{{route('students.edit', $student->id)}}" style="color: #000000;">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
                                                     <form action="{{ route('students.destroy', $student->id) }}"

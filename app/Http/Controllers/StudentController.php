@@ -55,7 +55,11 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        // $student_subjects = [];
+        // foreach($student->subjects() as $subject){
+        //     $student_subjects.add($subject['id']);
+        // }
+        return view('editStudent', ['student' => $student, 'subjects' => Subject::all()]);
     }
 
     /**
