@@ -10,8 +10,16 @@ class Student extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'email', 'address', 'phone_number', 'added_by'
+    ];
+
     public function creator(){
         return $this->belongsTo(User::class, 'added_by');
+    }
+
+    public function subjects(){
+        return $this->belongsToMany(Subject::class, 'students_subjects');
     }
 
 }

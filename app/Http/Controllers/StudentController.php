@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Models\Student;
+use App\Models\Subject;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -13,7 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('student', ['students'=> Student::all()]);
+        return view('student', ['students'=> Student::all(), 'subjects' => Subject::all()]);
     }
 
     /**
@@ -29,7 +32,14 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        Student::create($request->validated());
+        $request->validated();
+        $request['added_by'] = 19;
+
+        DB::transaction(function() use ($request){
+            $student = Student::create($request->toArray());
+            $student->subjects()->attach($request->subjects_id);
+        });
+        return redirect()->route('students.index');
     }
 
     /**
@@ -37,7 +47,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return "show method";
+        return $student;
     }
 
     /**
@@ -52,8 +62,9 @@ class StudentController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Student $student)
-    {
-        //
+    {  
+        $student->update($request->validated());
+        return redirect()->route('students.index');
     }
 
     /**
@@ -61,6 +72,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        return $student;
+        $student->delete();
+        return redirect()->route('students.index');
     }
 }
