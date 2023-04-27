@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'address',
+        'phone_number',
         'password',
     ];
 
@@ -42,8 +45,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
-    function creator(){
-        return $this->hasOne($this::class, 'created_by');
+
+    function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
+
+
+    // protected function setPasswordAttribute($value)
+    // {
+    //     $this->attributes['password'] = $this->passwordGenerator();
+    // }
+
+    // private function passwordGenerator(): string
+    // {
+    //     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*_";
+    //     $password = substr(str_shuffle($chars), 0, 816);
+    //     return $password;
+    // }
 }

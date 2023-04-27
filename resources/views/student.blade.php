@@ -36,6 +36,9 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Added By</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Subjects</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Date</th>
@@ -50,10 +53,12 @@
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm">{{ $student->name }}</h6>
-                                                            <p class="text-xs text-secondary mb-0">{{ $student->email }}</p>
+                                                            <p class="text-xs text-secondary mb-0">{{ $student->email }}
+                                                            </p>
                                                         </div>
                                                     </div>
                                                 </td>
+
                                                 <td>
                                                     <p class="text-xs text-secondary mb-0">{{ $student->address }}</p>
                                                 </td>
@@ -76,6 +81,23 @@
                                                     </div>
                                                 </td>
 
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">
+                                                                <ul>
+                                                                    @foreach ($student->subjects as $subject)
+                                                                        <li>
+                                                                            {{ $subject->name }}
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </h6>
+                                                            <p class="text-xs text-secondary mb-0"></p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
                                                 <td class="align-middle text-center">
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <span
@@ -88,13 +110,13 @@
 
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a href="" style="color: #000000;">
+                                                    <a href="{{route('students.edit', $student->id)}}" style="color: #000000;">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
                                                     <form action="{{ route('students.destroy', $student->id) }}"
                                                         method="post">
                                                         @method('DELETE')
-                                                        <button class="border-0" type="submit">
+                                                        <button class="border-0 bg-white" type="submit">
                                                             <i class="material-icons opacity-10">delete</i>
                                                         </button>
                                                         @csrf
@@ -119,5 +141,74 @@
             data-target="#exampleModalLong">
             <i class="material-icons py-2">add</i>
         </a>
+    </div>
+
+    {{-- model to add student --}}
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Student Registration</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="{{ route('students.store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="name" id="name"
+                                    aria-describedby="helpId" placeholder="Name" require_onced>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    aria-describedby="helpId" placeholder="Email" require_onced>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-2 col-form-label">Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="address" id="address"
+                                    aria-describedby="helpId" placeholder="Address" require_onced>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" name="phone_number" id="phone"
+                                    aria-describedby="helpId" placeholder="Phone" require_onced>
+                            </div>
+                        </div>
+
+                        <h5>Subjects</h5>
+
+                        @foreach ($subjects as $subject)
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="subjects_id[]"
+                                        value="<?php echo $subject['id']; ?>">
+                                    <?php echo $subject['name']; ?>
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
     </div>
 @endsection
