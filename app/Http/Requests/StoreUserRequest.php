@@ -25,7 +25,8 @@ class StoreUserRequest extends FormRequest
             'name' => 'required',
             'address' => 'required',
             'email' => 'required|email',
-            'phone_number' => 'required|digits:10',
+            'phone_number' => 'required',
+            // 'phone_number' => 'required|digits:10',
         ];
     }
 }
