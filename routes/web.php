@@ -3,6 +3,7 @@
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,10 @@ Route::get('/AddSubject', function(){
     return view('AddSubject');
 });
 Route::post('add', [SubjectController::class, 'add']);
+
+// Teacher Route
+Route::get('teachers',[TeacherController::class,'teachershow']);
+Route::get('AddTeacher',[TeacherController::class,'SubjectShow']);
+Route::post('addTeacher',[TeacherController::class,'add']);
+Route::get('EditTeacher/{id}',[TeacherController::class,'ShowTeacherAndSubject']);
+Route::post('EditTeacher/{id}',[TeacherController::class,'UpdateTeacher']);
