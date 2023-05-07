@@ -31,8 +31,8 @@ class userController extends Controller
     public function store(StoreUserRequest $request)
     {
         $request->validated();
-        $request['password'] = 'apple';
-        User::create($request->toArray());
+        $user = User::create($request->toArray());
+        $user->sendMail();
         return redirect(route("users.index"));
     }
 

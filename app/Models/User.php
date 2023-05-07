@@ -14,6 +14,15 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+    public function __construct(array $attributes = [])
+    {
+            parent::__construct($attributes);
+            $pass = $this->passwordGenerator();
+            request()->request->add(['password_without_hah' => $pass]);
+            $this->attributes['password'] = Hash::make($pass);
+        
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,21 +61,17 @@ class User extends Authenticatable
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    
-    function setPasswordAttribute($value){
-        $this->attributes['password'] = Hash::make($value);
+
+    public function passwordGenerator()
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*_";
+        $password = substr(str_shuffle($chars), 0, 16);
+
+        return $password;
     }
 
-
-    // protected function setPasswordAttribute($value)
-    // {
-    //     $this->attributes['password'] = $this->passwordGenerator();
-    // }
-
-    // private function passwordGenerator(): string
-    // {
-    //     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*_";
-    //     $password = substr(str_shuffle($chars), 0, 816);
-    //     return $password;
-    // }
+    public function sendMail()
+    {
+        request('password_without_hah');
+    }
 }

@@ -30,7 +30,7 @@ class LoginController extends Controller
 
             return redirect('/');
         } else {
-            dd('hello world');
+            dd('incorrect credential provided');
             return view('login');
         }
     }
