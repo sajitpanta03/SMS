@@ -1,17 +1,6 @@
-<?php
-require_once '../Models/subject.php';
-require_once '../Models/teacher.php';
-require_once '../Layouts/header.php';
-$_SESSION['active'] = 'teacher';
-require_once '../Layouts/side_navigation.php';
-
-$teachers = Teacher::selectWithoutDeleted();
-$subjects = Subject::select('id, name');
-?>
+@extends('Layout')
 
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-
-  <?php require_once '../Layouts/navigation.php'; ?>
 
   <div class="container-fluid py-4">
     <div class="row">

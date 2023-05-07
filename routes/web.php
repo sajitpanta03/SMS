@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,3 +35,10 @@ Route::get('/AddSubject', function(){
     return view('AddSubject');
 });
 Route::post('add', [SubjectController::class, 'add']);
+
+// Login Route
+// Route::view('login', 'login');
+// Route::post('login', [LoginController::class, 'login']);
+
+// Teacher Route
+Route::get('teachers', [TeacherController::class, 'show']);

@@ -1,15 +1,13 @@
-@extends('Layouts.main')
+{{-- @extends('Layouts.main')
 
-@section('content')
+@section('content') --}}
     
 <div class="col-4 shadow pb-3 mt-5 pt-3" style="background-color: #999; border-radius: 0.5rem;">
-    <form action="http://localhost/php/OOP/student-management-system/loginController/loginCheck.php" method="post">
+    <form action="\login" method="post">
+        @csrf
         <div class="form-group">
             <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelpId"
-                placeholder="Email" <?php if (isset($_SESSION['email'])) { ?>
-                value="<?php echo $_SESSION['email']; ?>
-        <?php } ?>
-        ">
+                placeholder="Email" value=">
 
             <?php if (isset($_SESSION['login_errors']['email'])) { ?>
             <small id="helpId" class="form-text text-danger"><?php echo $_SESSION['login_errors']['email']; ?></small>
@@ -26,4 +24,4 @@
     </form>
 </div>
 
-@endsection
+{{-- @endsection --}}

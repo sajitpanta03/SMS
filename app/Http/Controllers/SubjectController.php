@@ -10,13 +10,12 @@ class SubjectController extends Controller
     function show()
     {
         $data = Subject::all();
-        return view('subject', ['subjects' => $data]);
+        return view('subject', ['subjects'=>$data]);
     }
 
     function delete($id)
     {
-        $data = Subject::with('student')->find($id);
-        dd($data->student);
+        $data = Subject::find($id);
         $data->delete();
         return redirect('subjects');
     }
