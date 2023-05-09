@@ -36,5 +36,3 @@ Route::get('/AddSubject', function(){
     return view('AddSubject');
 });
 Route::post('add', [SubjectController::class, 'add']);
-
-//
