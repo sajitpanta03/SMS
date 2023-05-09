@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\MyJob;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
@@ -14,34 +15,39 @@ class TeacherController extends Controller
     return view('teacher',['teachers'=>$data]);
     }
 
+
+
     public function SubjectShow()
     {
         $data = Subject::all();
         return view('AddTeacher', ['subjects' => $data]);
     }
 
+
+
     public function add(Request $req){
-        Teacher::create([
+        $teacher=Teacher::create([
             'name'=> $req->name,
             'address'=> $req->address,
             'phone_number'=> $req->phone,
             'email'=> $req->email,
         ]);
-
-        $email= $req->email;
-        $teacherDetail= Teacher::firstWhere('email', $email);
-        $subjectids= $req->subjects_id;
-        foreach($subjectids as $subjectid){
-
-            teacher_subject::create([
-                'teacher_id'=> $teacherDetail->id,
-                'subject_id'=> $subjectid
-            ]);
-
-        }
-
+        // dispatch('MyJob');
+        MyJob::dispatch();
+       
+        $subjects=$req->subjects_id;
+        // foreach($subjects as $subject){
+        //  $subjectids=new teacher_subject([
+        //     'subject_id'=> $subject
+        //  ]);
+         $teacher->subject()->attach($subjects);
+       // }
+        
         return redirect('teachers');
     }
+
+
+
 
     public function ShowTeacherAndSubject($id){
         $Teacher=Teacher::find($id);
@@ -50,23 +56,37 @@ class TeacherController extends Controller
     }
 
 
+
     public function UpdateTeacher(Request $req){
-     Teacher::where('id', '=', $req->id)
-	->update([
+
+        // dd(Teacher::find($))
+     $teacher=Teacher::find($req->id);
+	$teacher->update([
 		'name'=> $req->name,
         'address'=> $req->address,
         'phone_number'=> $req->phone,
         'email'=> $req->email
 	]);
-    $subjectsIDs= $req->subjects_id;
-    foreach($subjectsIDs as $subjectsID){
 
-        teacher_subject::where('teacher_id', '=', $req->id)
-        ->update([
-            'subject_id'=> $subjectsID
-        ]);
+    // $subjectsIDs= $req->subjects_id;
+    // foreach($subjectsIDs as $subjectsID){
+
+    //     teacher_subject::where('teacher_id', '=', $req->id)
+    //     ->update([
+    //         'subject_id'=> $subjectsID
+    //     ]);
+
+    // }
+
+    $teacher->subject()->sync($req->subjects_id);
+    return redirect('teachers');
 
     }
 
+    public function Delete($id){
+     $teacher= Teacher::find($id);
+     $teacher->delete();
+
+     return redirect('teachers');
     }
 }

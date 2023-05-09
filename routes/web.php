@@ -19,19 +19,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/login', function () {
-    return view('login');
-});
+// Route::get('/login', function () {
+//     return view('login');
+// });
 
-Route::get('/logout', function () {
-    session()->forget('user_id');
-    session()->forget('user_name');
-    return redirect()->route('login');
-});
+// Route::get('/logout', function () {
+//     session()->forget('user_id');
+//     session()->forget('user_name');
+//     return redirect()->route('login');
+// });
 
-Route::post('login', LoginController::class)->name('login');
+// Route::post('login', LoginController::class)->name('login');
 
-Route::group(['middleware' => 'guard'], function () {
+// Route::group(['middleware' => 'guard'], function () {
 
     Route::get('/', function () {
         return view('dashboard');
@@ -47,4 +47,12 @@ Route::group(['middleware' => 'guard'], function () {
         return view('AddSubject');
     });
     Route::post('add', [SubjectController::class, 'add']);
-});
+
+   // Teacher Route
+   Route::get('teachers',[TeacherController::class,'teachershow']);
+   Route::get('AddTeacher',[TeacherController::class,'SubjectShow']);
+   Route::post('addTeacher',[TeacherController::class,'add']);
+   Route::get('EditTeacher/{id}',[TeacherController::class,'ShowTeacherAndSubject']);
+   Route::post('EditTeacher/{id}',[TeacherController::class,'UpdateTeacher']);
+   Route::get('DeleteTeacher/{id}',[TeacherController::class,'Delete']);
+// });

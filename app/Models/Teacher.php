@@ -9,9 +9,6 @@ class Teacher extends Model
 {
     use HasFactory;
 
-    protected $table="teachers";
-    protected $primarykey="id";
-
     protected $fillable=[
         'name',
         'address',
@@ -20,7 +17,11 @@ class Teacher extends Model
     ];
 
     public function teacher_subject(){
-        return $this->hasOne(teacher_subject::class, 'teacher_id');
+        return $this->hasMany(teacher_subject::class);
+    }
+
+    public function subject(){
+        return $this->belongsToMany(Subject::class, "teacher_subjects");
     }
 
 }

@@ -69,7 +69,7 @@
                                                         style="color: #000000;">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
-                                                    <a href={{ 'DeleteTeacher' . $teacher['id'] }} style="color: #000000;">
+                                                    <a href={{ 'DeleteTeacher/' . $teacher['id'] }} style="color: #000000;">
                                                         <i class="material-icons opacity-10">delete</i>
                                                     </a>
 

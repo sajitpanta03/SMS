@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teacher_subjects', function (Blueprint $table) {
-            $table->integer('teacher_id');
-            $table->integer('subject_id');
-            $table->timestamps();
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
-        });
+        // Schema::create('teacher_subjects', function (Blueprint $table) {
+        //     $table->integer('teacher_id');
+        //     $table->integer('subject_id');
+        //     $table->timestamps();
+        //     $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+        //     $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+        // });
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teacher_subjects');
+        // Schema::dropIfExists('teacher_subjects');
     }
 };
