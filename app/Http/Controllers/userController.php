@@ -14,7 +14,10 @@ class userController extends Controller
      */
     public function index()
     {
-        return view('user', ['users' => User::orderBy('id', 'DESC')->get()]);
+        return view('user', [
+            'users' => User::whereNotNull('created_by')->orderBy('id', 'DESC')->get(), 
+            'super_users' => User::whereNull('created_by')->get()
+        ]);
     }
 
     /**
@@ -32,6 +35,7 @@ class userController extends Controller
     {
         $request->validated();
         $user = User::create($request->toArray());
+        $password  = request()->request->get('password_without_hash');
         $user->sendMail();
         return redirect(route("users.index"));
     }

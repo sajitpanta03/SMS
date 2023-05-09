@@ -32,9 +32,6 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        $request->validated();
-        $request['added_by'] = 19;
-
         DB::transaction(function() use ($request){
             $student = Student::create($request->toArray());
             $student->subjects()->attach($request->subjects_id);

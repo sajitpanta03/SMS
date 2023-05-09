@@ -15,6 +15,8 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{url('/')}}/css/material-dashboard.css" rel="stylesheet" />
 
+    @yield('css')
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 

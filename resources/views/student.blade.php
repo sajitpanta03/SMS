@@ -1,22 +1,27 @@
 @extends('Layouts.main')
 
+@section('css')
+    <link rel="stylesheet" href="{{url('/')}}/css/trashbutton.css">
+@endsection
+
 @section('content')
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-
 
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="row bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <div class="row bg-gradient-primary shadow-primary border-radius-lg pt-3 pb-1">
                                 <div class="col-10">
                                     <h6 class="text-white text-capitalize ps-3">Student table</h6>
                                 </div>
-                                <div class="col-2">
-                                    <a name="recycle" id="recycle" class="btn text-white"
-                                        href="http://localhost/php/OOP/student-management-system/pages/studentRecycle.php"
-                                        role="button" style="background-color: #97214a;">Recycle Bin</a>
+                                <div class="col-2 text-right">
+                                    <a href="{{route('students.trash')}}" class="icon-container">
+                                        <i class="material-icons opacity-10"
+                                            style="color: #fff; font-size: 30px">restore_from_trash</i>
+                                        <div class="tooltip">Trash</div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -36,18 +41,18 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Added By</th>
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Subjects</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Subjects</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Date</th>
-                                            <th class="text-secondary opacity-7"></th>
+                                            <th class="text-secondary opacity-7"></th> 
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($students as $student)
+                                        @forelse ($students as $student)
                                             <tr>
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
@@ -109,8 +114,9 @@
                                                     </div>
 
                                                 </td>
-                                                <td class="align-middle">
-                                                    <a href="{{route('students.edit', $student->id)}}" style="color: #000000;">
+                                                <td class="align-middle d-flex">
+                                                    <a href="{{ route('students.edit', $student->id) }}"
+                                                        style="color: #000000;">
                                                         <i class="material-icons opacity-10">edit</i>
                                                     </a>
                                                     <form action="{{ route('students.destroy', $student->id) }}"
@@ -124,7 +130,13 @@
 
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @empty
+                                        <tr>
+                                            <td><span
+                                                    class="text-secondary text-ls font-weight-bold">Student not registered yet</span>
+                                            </td>
+                                        </tr>
+                                        @endforelse
 
                                     </tbody>
                                 </table>

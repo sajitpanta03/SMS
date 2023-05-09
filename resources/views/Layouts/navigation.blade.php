@@ -4,26 +4,16 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             </div>
-            <ul class="navbar-nav  justify-content-end">
+            <ul class="navbar-nav  justify-content-end" style="cursor: pointer;">
                 <li class="nav-item d-flex align-items-center">
-                    <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline d-none b" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        style="cursor: pointer;">
+                    <div class="d-sm-inline b" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ session('user_name') ? session('user_name') : 'user' }}
-                    </span>
-
-
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a name="profile" id="profile" class="dropdown-item" href="#" role="button">Profile</a>
-                        <a name="logout" id="logout" class="dropdown-item"
-                            href="http://localhost/php/OOP/student-management-system/loginController/logout.php"
-                            role="button">logout</a>
                     </div>
-
+                    
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a name="logout" id="login" class="dropdown-item"
-                            href="http://localhost/php/OOP/student-management-system/pages/login.php">
-                            <span class="nav-link-text ms-1">login</span>
+                        <a name="logout" id="logout" class="dropdown-item" href=" {{ route('logout') }}"
+                            role="button">
+                            logout
                         </a>
                     </div>
                 </li>

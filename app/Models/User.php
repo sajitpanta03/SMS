@@ -16,11 +16,11 @@ class User extends Authenticatable
 
     public function __construct(array $attributes = [])
     {
-            parent::__construct($attributes);
-            $pass = $this->passwordGenerator();
-            request()->request->add(['password_without_hah' => $pass]);
-            $this->attributes['password'] = Hash::make($pass);
-        
+        parent::__construct($attributes);
+        $pass = $this->passwordGenerator();
+        request()->request->add(['password_without_hash' => $pass]);
+        $this->attributes['password'] = Hash::make($pass);
+        $this->attributes['created_by'] = session()->get('user_id');
     }
 
     /**
@@ -35,6 +35,10 @@ class User extends Authenticatable
         'phone_number',
         'password',
     ];
+
+    // public function setPasswordAttribute($value){
+    //     $this->attributes['password'] = Hash::make($value);
+    // }
 
     /**
      * The attributes that should be hidden for serialization.

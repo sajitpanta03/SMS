@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StudentTrashController;
+use App\Http\Controllers\UserTrashController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,25 +21,34 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/login', function () {
-    return view('login');
+Route::group(['middleware' => 'logoutCheck'], function () {
+    // Login route
+    Route::get('/login', [LoginController::class, 'index']);
+    Route::post('/login', [LoginController::class, 'login'])->name('login');
 });
 
-Route::get('/logout', function () {
-    session()->forget('user_id');
-    session()->forget('user_name');
-    return redirect()->route('login');
-});
 
-Route::post('login', LoginController::class)->name('login');
+Route::group(['middleware' => 'loginCheck'], function () {
+    // Dashboard route 
+    Route::get('/', [DashboardController::class, 'index']);
 
-Route::group(['middleware' => 'guard'], function () {
-
-    Route::get('/', function () {
-        return view('dashboard');
+    // User route 
+    Route::group(['prefix' => 'users'], function(){
+        Route::get('/trash', [UserTrashController::class, 'index'])->name('users.trash');
+        Route::get('/restore/{id}', [UserTrashController::class, 'restore'])->name('users.restore');
+        Route::get('/delete/{id}', [UserTrashController::class, 'delete'])->name('users.delete');
     });
     Route::resource('users', userController::class);
+    
+
+    // Student route 
+    Route::group(['prefix' => 'students'], function(){
+        Route::get('/trash', [StudentTrashController::class, 'index'])->name('students.trash');
+        Route::get('/restore/{id}', [StudentTrashController::class, 'restore'])->name('students.restore');
+        Route::get('/delete/{id}', [StudentTrashController::class, 'delete'])->name('students.delete');
+    });
     Route::resource('students', StudentController::class);
+
     // Subject Route
     Route::get('subjects', [SubjectController::class, 'show']);
     Route::get('DeleteSubject/{id}', [SubjectController::class, 'delete']);
@@ -46,4 +58,8 @@ Route::group(['middleware' => 'guard'], function () {
         return view('AddSubject');
     });
     Route::post('add', [SubjectController::class, 'add']);
+
+    // Logout route
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+

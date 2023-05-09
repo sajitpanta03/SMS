@@ -16,7 +16,12 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    function index()
+    {
+        return view('login');
+    }
+
+    function login(Request $request)
     {
         $validatedData = $request->validate([
             'email' => 'required|email',
@@ -27,11 +32,23 @@ class LoginController extends Controller
         if ($user && Hash::check($validatedData['password'], $user->password)) {
             Session::put('user_id', $user->id);
             Session::put('user_name', $user->name);
+            if(is_null($user->created_by)){
+                Session::put('super_user', 1);
+            }else{
+                Session::put('user_id', 0);
+            }
 
             return redirect('/');
         } else {
-            dd('incorrect credential provided');
-            return view('login');
+            return redirect()->route('login')->withErrors('message', 'Incorrect credential provided');
         }
+    }
+
+    function logout()
+    {
+        session()->forget('user_id');
+        session()->forget('user_name');
+        session()->forget('super_user');
+        return redirect()->route('login');
     }
 }

@@ -11,6 +11,14 @@ class Student extends Model
 {
     use HasFactory, SoftDeletes;
 
+    
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->attributes['added_By'] = session()->get('user_id');
+    }
+
+
     protected $fillable = [
         'name', 'email', 'address', 'phone_number', 'added_by'
     ];
