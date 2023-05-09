@@ -61,5 +61,12 @@ Route::group(['middleware' => 'loginCheck'], function () {
 
     // Logout route
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-});
 
+   // Teacher Route
+   Route::get('teachers',[TeacherController::class,'teachershow']);
+   Route::get('AddTeacher',[TeacherController::class,'SubjectShow']);
+   Route::post('addTeacher',[TeacherController::class,'add']);
+   Route::get('EditTeacher/{id}',[TeacherController::class,'ShowTeacherAndSubject']);
+   Route::post('EditTeacher/{id}',[TeacherController::class,'UpdateTeacher']);
+   Route::get('DeleteTeacher/{id}',[TeacherController::class,'Delete']);
+});
