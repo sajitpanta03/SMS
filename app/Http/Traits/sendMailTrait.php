@@ -11,10 +11,8 @@ trait sendMailTrait{
             'body' => 'Your Account has been Created in Student Management System',
             'password' => $message
         ];
- 
+        
         Mail::to($to)->send(new MailNotify($maildata));
-
-        dd('email send');
     }
 }
 

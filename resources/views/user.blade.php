@@ -33,7 +33,6 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Date</th>
-                                            <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -87,13 +86,18 @@
                                 <div class="col-10">
                                     <h6 class="text-white text-capitalize ps-3">Users</h6>
                                 </div>
-                                <div class="col-2 text-right">
-                                    <a href="{{ route('users.trash') }}" class="icon-container">
-                                        <i class="material-icons opacity-10"
-                                            style="color: #fff; font-size: 30px">restore_from_trash</i>
-                                        <div class="tooltip">Trash</div>
-                                    </a>
-                                </div>
+
+                                @if (session()->has('super_user'))
+                                    <div class="col-2 text-right">
+                                        <a href="{{ route('users.trash') }}" class="icon-container">
+                                            <i class="material-icons opacity-10"
+                                                style="color: #fff; font-size: 30px">restore_from_trash</i>
+                                            <div class="tooltip">Trash</div>
+                                        </a>
+                                    </div>
+                                @endif
+
+
                             </div>
                         </div>
                         <div class="card-body p-0 pb-2">
@@ -114,7 +118,6 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Date</th>
-                                            <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -164,19 +167,23 @@
                                                     </div>
 
                                                 </td>
-                                                <td class="align-middle d-flex">
 
-                                                    <a href="{{ route('users.edit', $user->id) }}" style="color: #000">
-                                                        <i class="material-icons opacity-10">edit</i>
-                                                    </a>
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
-                                                        @method('DELETE')
-                                                        <button class="border-0 bg-white" type="submit">
-                                                            <i class="material-icons opacity-10">delete</i>
-                                                        </button>
-                                                        @csrf
-                                                    </form>
-                                                </td>
+                                                @if (session()->has('super_user'))
+                                                    <td class="align-middle d-flex">
+
+                                                        <a href="{{ route('users.edit', $user->id) }}" style="color: #000">
+                                                            <i class="material-icons opacity-10">edit</i>
+                                                        </a>
+                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                            method="post">
+                                                            @method('DELETE')
+                                                            <button class="border-0 bg-white" type="submit">
+                                                                <i class="material-icons opacity-10">delete</i>
+                                                            </button>
+                                                            @csrf
+                                                        </form>
+                                                    </td>
+                                                @endif
                                             </tr>
                                         @empty
                                             <tr>
@@ -224,32 +231,57 @@
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="name" id="name"
-                                    aria-describedby="helpId" placeholder="Name" require_onced>
+                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}"
+                                    aria-describedby="helpId" placeholder="Name" required>
+                                <small class="form-text text-danger">
+                                    @error('name')
+                                        {{ $message }}
+                                    @enderror
+                                </small>
                             </div>
+
+
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="email" id="email"
-                                    aria-describedby="helpId" placeholder="Email" require_onced>
+                                <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}"
+                                    aria-describedby="helpId" placeholder="Email" required>
+
+                                <small class="form-text text-danger">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </small>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="address" id="address"
-                                    aria-describedby="helpId" placeholder="Address" require_onced>
+                                <input type="text" class="form-control" name="address" id="address" value="{{ old('address') }}"
+                                    aria-describedby="helpId" placeholder="Address" required>
+
+                                <small class="form-text text-danger">
+                                    @error('address')
+                                        {{ $message }}
+                                    @enderror
+                                </small>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="phone_number" id="phone"
-                                    aria-describedby="helpId" placeholder="Phone" require_onced>
+                                <input type="number" class="form-control" name="phone_number" id="phone" value="{{ old('phone_number') }}"
+                                    aria-describedby="helpId" placeholder="Phone" required>
+
+                                <small class="form-text text-danger">
+                                    @error('phone_number')
+                                        {{ $message }}
+                                    @enderror
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -262,4 +294,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @if ($errors->all())
+        <script>
+            $('#exampleModalLong').modal('show');
+        </script>
+    @endif
 @endsection

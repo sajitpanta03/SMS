@@ -34,13 +34,11 @@ class LoginController extends Controller
             Session::put('user_name', $user->name);
             if(is_null($user->created_by)){
                 Session::put('super_user', 1);
-            }else{
-                Session::put('user_id', 0);
             }
 
             return redirect('/');
         } else {
-            return redirect()->route('login')->withErrors('message', 'Incorrect credential provided');
+            return redirect()->route('login')->withErrors(['loginError' => 'Incorrect credential provided']);
         }
     }
 

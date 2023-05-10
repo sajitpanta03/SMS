@@ -11,21 +11,13 @@
 </head>
 
 <body class="align">
-    {{-- @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
 
     <div class="grid">
-        @if ($errors->any())
-            {{ dd($errors) }}
-        @endif
-
+        @error('loginError')
+            <div class="alert alert-primary" role="alert">
+                <strong>{{ $message }}</strong>
+            </div>
+        @enderror
         <form action="{{ route('login') }}" method="POST" class="form login">
             @csrf
             <div class="form__field">

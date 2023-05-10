@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>{{ $mailData['title'] }}</h1>
-    <p>h3{{ $mailData['body'] }}</p>
+    <p>{{ $mailData['body'] }}</p>
   
     <p>Your password is: <b>{{$mailData['password']}}</b></p>
      
