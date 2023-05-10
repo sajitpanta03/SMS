@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-=======
 
     protected $fillable=[
         'name',
@@ -26,5 +24,4 @@ class Teacher extends Model
         return $this->belongsToMany(Subject::class, "teacher_subjects");
     }
 
->>>>>>> 8717af79cc31d1cb76339b939b21945446cf7a09
 }

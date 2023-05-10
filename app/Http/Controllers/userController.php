@@ -36,7 +36,7 @@ class userController extends Controller
         $request->validated();
         $user = User::create($request->toArray());
         $password  = request()->request->get('password_without_hash');
-        $user->sendMail();
+        $user->sendMail($password);
         return redirect(route("users.index"));
     }
 

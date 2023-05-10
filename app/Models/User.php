@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Http\Traits\sendMailTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, sendMailTrait;
 
     public function __construct(array $attributes = [])
     {
@@ -74,8 +76,9 @@ class User extends Authenticatable
         return $password;
     }
 
-    public function sendMail()
+    public function sendMail($mes)
     {
-        request('password_without_hah');
+        $this->sendMailTT( $this->email, $mes);
+    
     }
 }
