@@ -48,10 +48,10 @@
           <h5>Subjects</h5>
 
           <?php
-          // $subjectId= $Teacher->teacher_subject->subject_id;
           $teacherId= $Teacher['id'];
           $subjectIds = $Teacher->teacher_subject()->where('teacher_id', $teacherId)->get();
-           foreach($subjects as $subject){
+         // dd($Teacher->subject()->get());
+           foreach($subjects as $subject){ // This "$subjects" also known as key or object returned here as a associative array from TeacherController's "ShowTeacherAndSubject" function. 
           ?>
           <div class="form-check">
             <label class="form-check-label">

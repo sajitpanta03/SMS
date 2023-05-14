@@ -27,17 +27,21 @@
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">ADDRESS</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">PHONE</th>
+                                            
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"> Subjects</th>
+                                            
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                class=" text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Date</th>
-                                            <th class="text-secondary opacity-7"></th>
+
+                                                <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         @foreach ($teachers as $teacher)
                                             <tr>
-                                                <td>
+                                                <td >
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm">{{ $teacher['name'] }}</h6>
@@ -52,6 +56,26 @@
                                                 <td>
 
                                                     <p class="text-xs text-secondary mb-0">{{ $teacher['phone_number'] }}</p>
+                                                </td>
+
+                                                <td>
+                                                <?php
+                                                $teacherId= $teacher['id'];
+                                                $subjectIds= $teacher->teacher_subject()->where('teacher_id', $teacherId)->get();
+                                                foreach($subjects as $subject){
+                                                ?>
+                                                 @foreach ($subjectIds as $subjectId)
+                                                 @if($subject['id']==$subjectId['subject_id']) 
+                                                 
+                                                 <p class="text-xs text-secondary mb-0">{{ $subject['name'] }}</p>
+                                                 
+                                                 @endif 
+
+                                                    @endforeach
+
+                                                    <?php 
+                                                }
+                                                ?>
                                                 </td>
 
 

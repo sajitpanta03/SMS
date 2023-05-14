@@ -6,13 +6,14 @@ use App\Jobs\MyJob;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use App\Models\Teacher;
-use App\Models\teacher_subject;
+
 
 class TeacherController extends Controller
 {
     public function teachershow(){
         $data=Teacher::all();
-    return view('teacher',['teachers'=>$data]);
+        $subject=Subject::all();
+    return view('teacher',['teachers'=>$data],['subjects'=>$subject]);
     }
 
 
@@ -33,15 +34,23 @@ class TeacherController extends Controller
             'email'=> $req->email,
         ]);
         // dispatch('MyJob');
-        MyJob::dispatch();
+        // MyJob::dispatch();
        
         $subjects=$req->subjects_id;
         // foreach($subjects as $subject){
-        //  $subjectids=new teacher_subject([
-        //     'subject_id'=> $subject
+       
+        // //  $teacher->subject()->update([
+        // //      'teacher_id'=> $teacher
+        // //  ]);
+
+        //  $sub=Subject::find($subject);
+        //  $sub->update([
+        //     'teacher_id'=>$teacher->id
         //  ]);
-         $teacher->subject()->attach($subjects);
+        
        // }
+
+       $teacher->subject()->attach($subjects);
         
         return redirect('teachers');
     }
@@ -59,7 +68,6 @@ class TeacherController extends Controller
 
     public function UpdateTeacher(Request $req){
 
-        // dd(Teacher::find($))
      $teacher=Teacher::find($req->id);
 	$teacher->update([
 		'name'=> $req->name,
