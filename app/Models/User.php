@@ -37,11 +37,6 @@ class User extends Authenticatable
         'phone_number',
         'password',
     ];
-
-    // public function setPasswordAttribute($value){
-    //     $this->attributes['password'] = Hash::make($value);
-    // }
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -59,6 +54,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'datetime:d-m-Y',
     ];
 
 
@@ -81,4 +77,18 @@ class User extends Authenticatable
         $this->sendMailTT( $this->email, $mes);
     
     }
+
+    public function setNameAttribute($value){
+        $this->attributes['name'] = ucwords($value);
+    }
+
+    public function getCreatedAtAttribute($value){
+        return date('d-M-Y h:i a', strtotime($value));
+    }
+
+    
+    public function getUpdatedAtAttribute($value){
+        return date('d-M-Y h:i a', strtotime($value));
+    }
+
 }

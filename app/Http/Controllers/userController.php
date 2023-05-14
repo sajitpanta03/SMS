@@ -15,8 +15,9 @@ class userController extends Controller
      */
     public function index()
     {
+        session()->put('active', 'user');
         return view('user', [
-            'users' => User::whereNotNull('created_by')->orderBy('id', 'DESC')->get(), 
+            'users' => User::whereNotNull('created_by')->orderBy('id', 'DESC')->get(),
             'super_users' => User::whereNull('created_by')->get()
         ]);
     }
@@ -39,7 +40,8 @@ class userController extends Controller
         $password  = request()->request->get('password_without_hash');
 
         // sending email using job
-        $user->sendMail($password);
+
+        EmailSendingJob::dispatch($user, $password);
 
         return redirect(route("users.index"));
     }

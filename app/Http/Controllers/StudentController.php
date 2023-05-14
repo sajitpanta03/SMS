@@ -16,6 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
+        session()->put('active', 'student');
         return view('student', ['students'=> Student::all(), 'subjects' => Subject::all()]);
     }
 

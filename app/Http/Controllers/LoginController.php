@@ -47,6 +47,7 @@ class LoginController extends Controller
         session()->forget('user_id');
         session()->forget('user_name');
         session()->forget('super_user');
+        session()->forget('active');
         return redirect()->route('login');
     }
 }

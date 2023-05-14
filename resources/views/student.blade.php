@@ -173,32 +173,53 @@
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label">Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="name" id="name"
+                                <input type="text" class="form-control" name="name" id="name"  value="{{ old('name') }}"
                                     aria-describedby="helpId" placeholder="Name" require_onced>
+                                    <small class="form-text text-danger">
+                                        @error('name')
+                                            {{ $message }}
+                                        @enderror
+                                    </small>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-9">
-                                <input type="email" class="form-control" name="email" id="email"
+                                <input type="email" class="form-control" name="email" id="email"  value="{{ old('email') }}"
                                     aria-describedby="helpId" placeholder="Email" require_onced>
+                                    <small class="form-text text-danger">
+                                        @error('email')
+                                            {{ $message }}
+                                        @enderror
+                                    </small>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="address" class="col-sm-2 col-form-label">Address</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="address" id="address"
+                                <input type="text" class="form-control" name="address" id="address"  value="{{ old('address') }}"
                                     aria-describedby="helpId" placeholder="Address" require_onced>
+                                    <small class="form-text text-danger">
+                                        @error('address')
+                                            {{ $message }}
+                                        @enderror
+                                    </small>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                             <div class="col-sm-9">
-                                <input type="number" class="form-control" name="phone_number" id="phone"
+                                <input type="number" class="form-control" name="phone_number" id="phone"  value="{{ old('phone_number') }}"
                                     aria-describedby="helpId" placeholder="Phone" require_onced>
+                                    
+                                <small class="form-text text-danger">
+                                    @error('phone_number')
+                                        {{ $message }}
+                                    @enderror
+                                </small>
                             </div>
                         </div>
 
@@ -223,4 +244,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    @if ($errors->all())
+        <script>
+            $('#exampleModalLong').modal('show');
+        </script>
+    @endif
 @endsection

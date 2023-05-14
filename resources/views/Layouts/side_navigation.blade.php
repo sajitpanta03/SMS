@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white" href="/">
+                <a class="nav-link text-white {{ session('active') == 'dashboard' ? 'active' : null }}" href="/">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('users.index') }}">
+                <a class="nav-link text-white {{ session('active') == 'user' ? 'active' : null }}" href="{{ route('users.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person</i>
                     </div>
@@ -28,7 +28,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('students.index') }}">
+                <a class="nav-link text-white {{ session('active') == 'student' ? 'active' : null }}" href="{{ route('students.index') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">school</i>
                     </div>

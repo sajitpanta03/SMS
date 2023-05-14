@@ -31,4 +31,10 @@ class Student extends Model
         return $this->belongsToMany(Subject::class, 'students_subjects');
     }
 
+    
+    public function setNameAttribute($value){
+        $this->attributes['name'] = ucwords($value);
+    }
+  
+
 }

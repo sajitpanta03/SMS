@@ -20730,7 +20730,6 @@ hr.horizontal.gray-light {
 
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
     display: block;
-    overflow: auto;
     height: calc(100vh - 360px);
 }
 
@@ -20824,7 +20823,6 @@ hr.horizontal.gray-light {
     }
     .navbar-vertical.navbar-expand-sm .navbar-collapse {
         display: block;
-        overflow: auto;
         height: calc(100vh - 360px);
     }
     .navbar-vertical.navbar-expand-sm>[class*="container"] {
@@ -20910,7 +20908,6 @@ hr.horizontal.gray-light {
     }
     .navbar-vertical.navbar-expand-md .navbar-collapse {
         display: block;
-        overflow: auto;
         height: calc(100vh - 360px);
     }
     .navbar-vertical.navbar-expand-md>[class*="container"] {
@@ -20996,7 +20993,6 @@ hr.horizontal.gray-light {
     }
     .navbar-vertical.navbar-expand-lg .navbar-collapse {
         display: block;
-        overflow: auto;
         height: calc(100vh - 360px);
     }
     .navbar-vertical.navbar-expand-lg>[class*="container"] {
@@ -21082,7 +21078,6 @@ hr.horizontal.gray-light {
     }
     .navbar-vertical.navbar-expand-xl .navbar-collapse {
         display: block;
-        overflow: auto;
         height: calc(100vh - 360px);
     }
     .navbar-vertical.navbar-expand-xl>[class*="container"] {
@@ -21168,7 +21163,6 @@ hr.horizontal.gray-light {
     }
     .navbar-vertical.navbar-expand-xxl .navbar-collapse {
         display: block;
-        overflow: auto;
         height: calc(100vh - 360px);
     }
     .navbar-vertical.navbar-expand-xxl>[class*="container"] {

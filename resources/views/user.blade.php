@@ -187,8 +187,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td><span class="text-secondary text-ls font-weight-bold">User Recycle Bin
-                                                        is Empty</span>
+                                                <td><span class="text-secondary text-ls font-weight-bold">User not Registered yet</span>
                                                 </td>
                                             </tr>
                                         @endforelse

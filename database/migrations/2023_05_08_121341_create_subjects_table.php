@@ -16,10 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('full_mark', 5, 2);
             $table->decimal('pass_mark', 5, 2);
-
-            $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('set null');
-
             $table->timestamps();
             $table->softDeletes();
         });

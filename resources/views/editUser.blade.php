@@ -9,7 +9,7 @@
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="name" id="name" value="{{ $user->name }}"
-                        require_onced>
+                        required>
                 </div>
             </div>
 
@@ -17,7 +17,7 @@
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-9">
                     <input type="email" class="form-control" name="email" id="email" value="{{ $user->email }}"
-                        require_onced>
+                        required>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
                 <label for="address" class="col-sm-2 col-form-label">Address</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" name="address" id="address" value="{{ $user->address }}"
-                        require_onced>
+                        required>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                 <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                 <div class="col-sm-9">
                     <input type="number" class="form-control" name="phone_number" id="phone" value="{{ $user->phone_number }}"
-                        require_onced>
+                        required>
                 </div>
             </div>
             <div class="modal-footer">
