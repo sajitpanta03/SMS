@@ -7,42 +7,48 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    function show()
+    public function show()
     {
         $data = Subject::all();
         return view('subject', ['subjects'=>$data]);
     }
 
-    function delete($id)
+    public function delete($id)
     {
         $data = Subject::find($id);
         $data->delete();
         return redirect('subjects');
     }
 
-    function ShowData($id)
+    public function ShowData($id)
     {
         $data = Subject::find($id);
         return view('EditSubject', ['data'=>$data]);
     }
 
-    function edit(Request $req)
+    public function edit(Request $request)
     {
-        $data = Subject::find($req->id);
-        $data->name = $req->name;
-        $data->full_mark = $req->full_mark;
-        $data->pass_mark = $req->pass_mark;
+        $data = Subject::find($request->id);
+        $data->name = $request->name;
+        $data->full_mark = $request->full_mark;
+        $data->pass_mark = $request->pass_mark;
         $data->save();
         return redirect('subjects');
     }
 
-    function add(Request $req)
+    public function add(Request $request)
     {
-        $data = new Subject();
-        $data->name = $req->name;
-        $data->full_mark = $req->full_mark;
-        $data->pass_mark = $req->pass_mark;
-        $data->save();
+        // $validated = $request->validate([
+        //     'name' => 'required|max:255',
+        //     'full_mark' => 'required|numeric|min:2|max:5',
+        //     'pass_mark' => 'required|numeric|min:2|max:5',
+        // ]);
+
+        $teacher=Subject::create([
+            'name'=> $request->name,
+            'full_mark'=> $request->full_mark,
+            'pass_mark'=> $request->pass_mark,
+        ]);
         return redirect('subjects');
     }
 }
