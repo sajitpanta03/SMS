@@ -21,7 +21,7 @@ class User extends Authenticatable
         parent::__construct($attributes);
         $pass = $this->passwordGenerator();
         request()->request->add(['password_without_hash' => $pass]);
-        $this->attributes['password'] = Hash::make($pass);
+        $this->attributes['password'] = $pass;
         $this->attributes['created_by'] = session()->get('user_id') ?? 1;
         
     }
@@ -56,7 +56,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'created_at' => 'datetime:d-m-Y',
     ];
 
 

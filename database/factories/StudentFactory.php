@@ -20,7 +20,7 @@ class StudentFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'address' => fake()->address(),
+            'address' => fake()->city(),
             'phone_number' => fake()->unique()->e164PhoneNumber()
         ];
     }

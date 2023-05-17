@@ -86,13 +86,11 @@
                                                     <div class="d-flex px-2 py-1">
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm">
-                                                                <ul>
-                                                                    @foreach ($student->subjects as $subject)
-                                                                        <li>
-                                                                            {{ $subject->name }}
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
+                                                                @foreach ($student->subjects as $subject)
+                                                                    <li>
+                                                                        {{ $subject->name }}
+                                                                    </li>
+                                                                @endforeach
                                                             </h6>
                                                             <p class="text-xs text-secondary mb-0"></p>
                                                         </div>

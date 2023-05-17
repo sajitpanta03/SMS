@@ -122,6 +122,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        {{$users->links()}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,7 +142,7 @@
     @endif
 
     <!-- Modal -->
-    {{-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -220,13 +223,13 @@
 
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 
-{{-- @section('script')
+@section('script')
     @if ($errors->all())
         <script>
             $('#exampleModalLong').modal('show');
         </script>
     @endif
-@endsection --}}
+@endsection

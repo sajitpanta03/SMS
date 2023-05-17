@@ -17,7 +17,7 @@ class StudentController extends Controller
     public function index()
     {
         session()->put('active', 'student');
-        $students = Student::with('creator', 'subjects')->paginate(5);
+        $students = Student::with('creator', 'subjects')->paginate(4);
         $subjects = Subject::all();
         return view('student', ['students'=> $students, 'subjects' => $subjects]);
     }

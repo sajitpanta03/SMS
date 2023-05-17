@@ -16,7 +16,7 @@ class userController extends Controller
     public function index()
     {
         session()->put('active', 'user');
-        $users = User::with('creator')->orderBy('created_by')->orderBy('id', 'DESC')->get();
+        $users = User::with('creator')->orderBy('created_by')->orderBy('id', 'DESC')->paginate(7);
         return view('user', compact('users'));
     }
 
