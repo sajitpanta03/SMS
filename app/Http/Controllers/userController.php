@@ -16,10 +16,8 @@ class userController extends Controller
     public function index()
     {
         session()->put('active', 'user');
-        return view('user', [
-            'users' => User::whereNotNull('created_by')->orderBy('id', 'DESC')->get(),
-            'super_users' => User::whereNull('created_by')->get()
-        ]);
+        $users = User::with('creator')->orderBy('created_by')->orderBy('id', 'DESC')->get();
+        return view('user', compact('users'));
     }
 
     /**

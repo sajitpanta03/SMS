@@ -22,7 +22,8 @@ class User extends Authenticatable
         $pass = $this->passwordGenerator();
         request()->request->add(['password_without_hash' => $pass]);
         $this->attributes['password'] = Hash::make($pass);
-        $this->attributes['created_by'] = session()->get('user_id');
+        $this->attributes['created_by'] = session()->get('user_id') ?? 1;
+        
     }
 
     /**
@@ -36,6 +37,7 @@ class User extends Authenticatable
         'address',
         'phone_number',
         'password',
+        'created_by'
     ];
     /**
      * The attributes that should be hidden for serialization.
@@ -89,6 +91,10 @@ class User extends Authenticatable
     
     public function getUpdatedAtAttribute($value){
         return date('d-M-Y h:i a', strtotime($value));
+    }
+
+    public function student(){
+        return $this->hasMany(Student::class, 'added_by');
     }
 
 }
