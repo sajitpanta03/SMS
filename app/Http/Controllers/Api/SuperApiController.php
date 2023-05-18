@@ -7,96 +7,78 @@ use Illuminate\Http\Request;
 
 class SuperApiController extends Controller
 {
-    protected static $whichModel;
-    /**
-     * Display a listing of the resource.
-     */
+    protected $whichModel;
+
+    public function __construct($whichModel)
+    {
+        $this->whichModel = $whichModel;
+    }
+
     public function index()
     {
-        return $this->whichModel::all();
+        $data = $this->whichModel::all();
+        return response()->json([
+            'data' => $data,
+            'status' => 1
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
-        $user = $this->whichModel::create($request->validated());
-        if ($user) {
+        $data = $this->whichModel::create($request->all());
+        return response()->json([
+            'data' => $data,
+            'status' => 1
+        ]);
+    }
+
+    public function show($id)
+    {
+        $data = $this->whichModel::find($id);
+        if ($data) {
             return response()->json([
-                'user' => $user,
+                'data' => $data,
                 'status' => 1
             ]);
         } else {
             return response()->json([
-                'user' => $user,
+                'data' => null,
+                'message' => 'No data found',
                 'status' => 0
             ]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, $id)
     {
-        $user = $this->whichModel::find($id);
-        if ($user) {
+        $data = $this->whichModel::find($id);
+        if ($data) {
+            $data->update($request->all());
             return response()->json([
-                'user' => $user,
+                'data' => $data,
+                'message' => 'Data updated successfully',
                 'status' => 1
             ]);
         } else {
             return response()->json([
-                'user' => null,
-                'message' => 'no user found',
+                'message' => 'No data found',
                 'status' => 0
             ]);
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateUserRequest $request, string $id)
+    public function destroy($id)
     {
-        $user = $this->whichModel::find($id);
-        if ($user) {
-            $user->update($request->validated());
+        $data = $this->whichModel::find($id);
+        if ($data) {
+            $data->delete();
             return response()->json([
-                'user' => $user,
-                'message' => 'user updated successfully',
+                'message' => 'Data deleted successfully',
                 'status' => 1
             ]);
         } else {
             return response()->json([
-                'message' => 'no user found',
-                'status' => 0
-            ]);
-        }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $user = $this->whichModel::find($id);
-        if($user){
-            if($user->delete()){
-                return response()->json([
-                    'message' => 'user deleted successfully',
-                    'status' => 1
-                ]);
-            }else{
-                return response()->json([
-                    'message' => 'user deleted successfully',
-                    'status' => 0
-                ]);
-            }
-        }else{
-            return response()->json([
-                'message' => 'user do not exists',
+                'message' => 'No data found',
                 'status' => 0
             ]);
         }

@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'David Chamling Rai',
-            'email' => 'DavidRai441@gmail.com',
-            'address' => 'Imadol, Lalitpur',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'address' => 'Admin',
             'phone_number' => '9801112223',
             'email_verified_at' => now(),
             'password' => '$2a$12$Le6slh7gVWZSfS0NgQeykuV2RZr/cLPi1oluGWJ1X9KbBx3O8/WoO', // admin

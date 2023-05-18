@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Api\SuperApiController;
+use App\Models\Student;
+use Illuminate\Http\Request;
 
-class UserController extends SuperApiController
+class StudentController extends SuperApiController
 {
     protected $whichModel;
 
     public function __construct()
     {
-        parent::__construct(User::class);
+        parent::__construct(Student::class);
     }
 }
