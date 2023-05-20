@@ -16,7 +16,7 @@ class userController extends Controller
     public function index()
     {
         session()->put('active', 'user');
-        $users = User::with('creator')->orderBy('created_by')->orderBy('id', 'DESC')->paginate(7);
+        $users = User::with('creator')->orderBy('created_by')->orderBy('id', 'DESC')->paginate(25);
         return view('user', compact('users'));
     }
 
@@ -34,12 +34,15 @@ class userController extends Controller
     public function store(StoreUserRequest $request)
     {
         $request->validated();
+        $password_raw = $this->passwordGenerator();
+        $password =  bcrypt($password_raw);
+        $request->request->add(['password' => $password]);
         $user = User::create($request->toArray());
-        $password  = request()->request->get('password_without_hash');
+
 
         // sending email using job
 
-        EmailSendingJob::dispatch($user, $password);
+        EmailSendingJob::dispatch($user, $password_raw);
 
         return redirect(route("users.index"));
     }
@@ -76,5 +79,13 @@ class userController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index');
+    }
+
+    public function passwordGenerator()
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*_";
+        $password = substr(str_shuffle($chars), 0, 16);
+
+        return $password;
     }
 }

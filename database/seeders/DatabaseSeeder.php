@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'password' => '$2a$12$Le6slh7gVWZSfS0NgQeykuV2RZr/cLPi1oluGWJ1X9KbBx3O8/WoO', // admin
             'created_by' => null
         ]);
-        Subject::factory(50)->create();
+        Subject::factory(20)->create();
         $this->call([
             UserSeeder::class,
             StudentSeeder::class

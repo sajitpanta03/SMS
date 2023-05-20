@@ -19,9 +19,6 @@ class User extends Authenticatable
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $pass = $this->passwordGenerator();
-        request()->request->add(['password_without_hash' => $pass]);
-        $this->attributes['password'] = $pass;
         $this->attributes['created_by'] = session()->get('user_id') ?? 1;
         
     }
@@ -64,14 +61,6 @@ class User extends Authenticatable
         return $this->belongsTo(User::class, 'created_by');
     }
 
-
-    public function passwordGenerator()
-    {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*_";
-        $password = substr(str_shuffle($chars), 0, 16);
-
-        return $password;
-    }
 
     public function sendMail($mes)
     {

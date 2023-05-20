@@ -15,7 +15,7 @@ class Student extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        // $this->attributes['added_by'] = session()->get('user_id');
+        $this->attributes['added_by'] = session()->get('user_id');
     }
 
 

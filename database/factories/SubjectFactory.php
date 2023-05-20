@@ -17,7 +17,6 @@ class SubjectFactory extends Factory
      */
     public function definition(): array
     {
-        
         return [
             'name' => Str::random(10),
             'full_mark' => '100',
