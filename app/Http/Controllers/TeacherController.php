@@ -10,7 +10,7 @@ use App\Models\Teacher;
 class TeacherController extends Controller
 {
     public function teachershow(){
-        $data=Teacher::all();
+        $data=Teacher::paginate(25);
         $subject=Subject::all();
     return view('teacher',['teachers'=>$data],['subjects'=>$subject]);
     }
