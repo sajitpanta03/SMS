@@ -14,11 +14,11 @@ class teacher_subject extends Seeder
      */
     public function run(): void
     {
-        $subject_count= Subject::count();
-        $teachers= Teacher::all();
+        $subject_count = Subject::count();
+        $teachers = Teacher::all();
         //dd($teachers);
-       foreach($teachers as $teacher){
-        $teacher->subject()->attach(rand(1,$subject_count));
-       }
+        foreach ($teachers as $teacher) {
+            $teacher->subject()->attach(rand(1, $subject_count));
+        }
     }
 }

@@ -20,7 +20,6 @@ class User extends Authenticatable
     {
         parent::__construct($attributes);
         $this->attributes['created_by'] = session()->get('user_id') ?? 1;
-        
     }
 
     /**

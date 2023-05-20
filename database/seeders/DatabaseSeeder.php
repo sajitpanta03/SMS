@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\Subject;
+use App\Models\Teacher;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,13 +23,15 @@ class DatabaseSeeder extends Seeder
             'address' => 'Admin',
             'phone_number' => '9801112223',
             'email_verified_at' => now(),
-            'password' => '$2a$12$Le6slh7gVWZSfS0NgQeykuV2RZr/cLPi1oluGWJ1X9KbBx3O8/WoO', // admin
+            'password' => bcrypt('admin'), // admin
             'created_by' => null
         ]);
         Subject::factory(20)->create();
+        Teacher::factory(2000)->create();
         $this->call([
             UserSeeder::class,
-            StudentSeeder::class
+            StudentSeeder::class,
+            teacher_subject::class
         ]); 
     }
 }
