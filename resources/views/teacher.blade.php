@@ -109,6 +109,9 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            {{ $teachers->links() }}
+        </div>
     </main>
 
 
