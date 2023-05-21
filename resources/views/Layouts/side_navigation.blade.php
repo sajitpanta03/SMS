@@ -37,7 +37,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="subjects">
+                <a class="nav-link text-white" href="{{url('/')}}/subjects">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">book</i>
                     </div>
@@ -47,7 +47,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="teachers">
+                <a class="nav-link text-white" href="{{url('/')}}/teachers">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">person_outline</i>
                     </div>
@@ -56,7 +56,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="">
+                <a class="nav-link text-white" href="{{url('/')}}/mark">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">description</i>
                     </div>

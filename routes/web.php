@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\MarkController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentTrashController;
@@ -70,4 +71,10 @@ Route::group(['middleware' => 'loginCheck'], function () {
    Route::get('EditTeacher/{id}',[TeacherController::class,'ShowTeacherAndSubject']);
    Route::post('EditTeacher/{id}',[TeacherController::class,'UpdateTeacher']);
    Route::get('DeleteTeacher/{id}',[TeacherController::class,'Delete']);
+
+   // Mark routes
+   Route::get('mark', [MarkController::class,'Show']);
+   Route::get('/mark/search', [MarkController::class,'search'])->name('mark.search');
+   Route::get('selectMark/{id}', [MarkController::class, 'edit'])->name('selectMark');
+   Route::post('selectMark/markadd', [MarkController::class, 'markAdd'])->name('mark.add');
 });

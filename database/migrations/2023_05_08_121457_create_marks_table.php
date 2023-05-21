@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('pass_mark', 5, 2);
             $table->decimal('obtained_mark', 5, 2);
 
+           
             $table->unsignedBigInteger('added_by')->nullable();
             $table->foreign('added_by')->references('id')->on('users')->onDelete('set null');
 
@@ -25,6 +26,9 @@ return new class extends Migration
 
             $table->unsignedBigInteger('subject_id')->nullable();
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('set null');
+
+            $table->unsignedBigInteger('exam_id')->nullable();
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('set null');
 
             $table->timestamps();
         });
