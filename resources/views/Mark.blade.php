@@ -12,7 +12,7 @@
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="row bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                                 <div class="col-10">
-                                    <h6 class="text-white text-capitalize ps-3">Student table</h6>
+                                    <h6 class="text-white text-capitalize ps-3">Marks table</h6>
                                 </div>
                                 <div class="col-2">
                                     <form action="{{ route('mark.search') }}" method="GET">
